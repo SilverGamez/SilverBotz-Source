@@ -1,0 +1,17 @@
+const { Client, Collection } = require("discord.js");
+const { token } = require("./config.json")
+
+const client = new Client({
+    disableEveryone: true
+})
+
+// Collections
+client.commands = new Collection();
+client.aliases = new Collection();
+
+
+["command","event"].forEach(handler => {
+    require(`./handlers/${handler}`)(client);
+});
+
+client.login(token);
